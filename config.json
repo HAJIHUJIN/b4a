@@ -1,0 +1,19 @@
+{
+  "log": { "level": "warn" },
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-in",
+      "listen": "127.0.0.1",
+      "listen_port": 8080,
+      "users": [{ "uuid": "2c11bde0-fa06-4438-9ff0-f8502faf6aa3" }],
+      "transport": {
+        "type": "ws",
+        "path": "/api/v1/stream",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    }
+  ],
+  "outbounds": [{ "type": "direct" }]
+}
