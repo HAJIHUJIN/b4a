@@ -1,17 +1,13 @@
-#!/bin/bash
+FROM python:3.11-alpine
 
-# 1. 赋予二进制文件可执行权限
-chmod +x ./sing-box ./cloudflared
+WORKDIR /app
 
-echo "=========================================="
-echo " 正在启动 Sing-box 与 Cloudflare Argo... "
-echo "=========================================="
+# 安装必要的系统工具
+RUN apk add --no-cache curl tar ca-certificates bash
 
-# 2. 在后台拉起 Sing-box
-./sing-box run -c ./config.json &
+COPY . .
 
-# 3. 等待 2 秒确保 Sing-box 已经监听 8080 端口
-sleep 2
+# 暴露 Back4App 默认端口 8080
+EXPOSE 8080
 
-# 4. 在前台拉起 Argo Tunnel（使用 exec 保持容器持续运行）
-exec ./cloudflared tunnel --no-autoupdate run --token "eyJhIjoiN2FhOWNmYTFkMDViOGYwMjY4NzYwNzRkNzBkNjI3MTgiLCJ0IjoiNWMwMTAxYjUtNTQwZS00MjUwLTlhYzItMWFiNDgyMDA2ZjVlIiwicyI6Ik5tSmxZMkUyTjJJdFpUaGtPQzAwTURZNExXSTJNRGN0T0RJM1lUUmxOR1F5WXpJeCJ9"
+CMD ["python3", "main.py"]
