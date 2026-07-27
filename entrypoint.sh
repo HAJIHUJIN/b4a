@@ -3,9 +3,9 @@
 export NODE_ENV="production"
 echo "Starting Gateway Engine..."
 
-# 1. 在本地 8081 端口启动 Python 伪装网页
+# 1. 在本地 8080 端口启动 Python 伪装网页 (响应 Back4app 健康检查)
 cd /app
-python3 -m http.server 8081 > /dev/null 2>&1 &
+python3 -m http.server 8080 > /dev/null 2>&1 &
 
 # 2. 在本地 8082 端口启动 Sing-Box 核心
 /usr/local/bin/node-runtime run -c /app/app.settings.data > /app/singbox.log 2>&1 &
