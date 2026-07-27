@@ -1,12 +1,17 @@
 {
-  "log": { "level": "warn" },
+  "log": { "level": "info" },
   "inbounds": [
     {
       "type": "vless",
       "tag": "vless-in",
       "listen": "127.0.0.1",
       "listen_port": 8082,
-      "users": [{ "uuid": "2c11bde0-fa06-4438-9ff0-f8502faf6aa3" }],
+      "users": [
+        {
+          "uuid": "2c11bde0-fa06-4438-9ff0-f8502faf6aa3",
+          "flow": ""
+        }
+      ],
       "transport": {
         "type": "ws",
         "path": "/api/v1/stream",
@@ -15,5 +20,10 @@
       }
     }
   ],
-  "outbounds": [{ "type": "direct" }]
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ]
 }
